@@ -4,8 +4,8 @@
 **Course**: Big Data  
 **Semester**: Fall 2025
 
-**GitHub Repository**: (My Repo)[https://github.com/WilJones-Red/Store_Streamlit_App]
-**Live Application**: (Deployed App)[Your Cloud Run URL Here]
+**GitHub Repository**: [My Repo](https://github.com/WilJones-Red/Store_Streamlit_App)  
+**Live Application**: [Deployed App](https://store-streamlit-app-728001184676.us-west3.run.app)
 
 ---
 

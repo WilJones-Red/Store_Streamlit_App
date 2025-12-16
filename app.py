@@ -1,5 +1,5 @@
 """
-Cstore Data Dashboard - DS 350 Final Challenge
+C-Store Data Dashboard - Big Data Final Challenge
 Interactive dashboard for analyzing convenience store sales data
 """
 
@@ -7,15 +7,15 @@ import streamlit as st
 
 # Page configuration
 st.set_page_config(
-    page_title="Cstore Data Dashboard",
+    page_title="C-Store Data Dashboard",
     page_icon="-",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # Main page
-st.title("Cstore Data Dashboard")
-st.markdown("### DS 350 Data Science Programming - Final Coding Challenge")
+st.title("C-Store Data Dashboard")
+st.markdown("### Big Data - Final Coding Challenge")
 st.markdown("---")
 
 st.markdown("""
@@ -100,12 +100,11 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### About This Project")
     st.info("""
-    **DS 350 Final Challenge**  
-    Data Science Programming
+    **Big Data Final Challenge**  
     """)
     st.markdown("---")
     st.markdown("### Data Source")
-    st.success("167 Idaho Cstore Locations")
+    st.success("167 Idaho C-Store Locations")
     st.markdown("---")
     st.markdown("### Navigation Help")
     st.markdown("""

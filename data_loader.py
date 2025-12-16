@@ -9,7 +9,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Data directory
-DATA_DIR = Path("Assets/DS350_FA25_Jones_Wil/data")
+DATA_DIR = Path("data/data")
 
 @st.cache_data(ttl=3600)
 def load_stores():
@@ -29,7 +29,7 @@ def load_payments():
 @st.cache_data(ttl=3600)
 def load_transaction_items():
     """Load all transaction items (lazy scan for performance)"""
-    return pl.scan_parquet(DATA_DIR / "transaction_items/*.parquet")
+    return pl.scan_parquet(str(DATA_DIR / "transaction_items" / "*.parquet"))
 
 @st.cache_data(ttl=3600)
 def load_enriched_transactions():
@@ -38,10 +38,10 @@ def load_enriched_transactions():
     Returns a joined dataset ready for analysis
     """
     # Lazy load for performance
-    trans = pl.scan_parquet(DATA_DIR / "transaction_items/*.parquet")
-    master = pl.scan_parquet(DATA_DIR / "cstore_master_ctin.parquet")
-    payments = pl.scan_parquet(DATA_DIR / "cstore_payments.parquet")
-    stores = pl.scan_parquet(DATA_DIR / "cstore_stores.parquet")
+    trans = pl.scan_parquet(str(DATA_DIR / "transaction_items" / "*.parquet"))
+    master = pl.scan_parquet(str(DATA_DIR / "cstore_master_ctin.parquet"))
+    payments = pl.scan_parquet(str(DATA_DIR / "cstore_payments.parquet"))
+    stores = pl.scan_parquet(str(DATA_DIR / "cstore_stores.parquet"))
     
     # Join transactions with product catalog, payments, and stores
     # Note: Cast STORE_ID in stores to string to match transaction data type

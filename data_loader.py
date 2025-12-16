@@ -31,11 +31,11 @@ def load_transaction_items():
     """Load all transaction items (lazy scan for performance)"""
     return pl.scan_parquet(str(DATA_DIR / "transaction_items" / "*.parquet"))
 
-@st.cache_data(ttl=3600)
+@st.cache_resource(ttl=3600)
 def load_enriched_transactions():
     """
     Load and enrich transaction items with product categories, payment info, and store details
-    Returns a joined dataset ready for analysis
+    Returns a LAZY frame for on-demand processing (Cloud Run optimized)
     """
     # Lazy load for performance
     trans = pl.scan_parquet(str(DATA_DIR / "transaction_items" / "*.parquet"))
@@ -69,7 +69,8 @@ def load_enriched_transactions():
         ])
     )
     
-    return enriched.collect()
+    # Return lazy frame - only collect when needed by specific queries
+    return enriched
 
 @st.cache_data(ttl=3600)
 def get_weekly_sales(exclude_fuels=True, stores=None, date_range=None):

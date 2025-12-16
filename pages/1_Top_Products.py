@@ -29,13 +29,14 @@ st.markdown("---")
 @st.cache_data(ttl=3600)
 def load_data():
     """Load and prepare sales data using Polars"""
-    # Load enriched transactions
+    # Load enriched transactions (lazy)
     df = load_enriched_transactions()
     
     # Exclude fuels using NONSCAN_CATEGORY column
     df = df.filter(pl.col("NONSCAN_CATEGORY") != "FUEL")
     
-    return df
+    # Collect only when filtering is done
+    return df.collect()
 
 # Load data
 df = load_data()

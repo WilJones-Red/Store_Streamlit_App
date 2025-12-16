@@ -27,7 +27,7 @@ st.markdown("---")
 @st.cache_data
 def get_store_locations():
     """Get unique stores with their locations from real data"""
-    df = load_enriched_transactions()
+    df = load_enriched_transactions().collect()
     
     # Get unique stores - all stores are in Idaho
     stores = (

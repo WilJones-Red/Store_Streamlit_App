@@ -31,7 +31,8 @@ def load_beverage_data():
         (pl.col("BRAND").is_not_null())
     )
     
-    return df
+    # Collect only after filtering
+    return df.collect()
 
 df = load_beverage_data()
 stores_df = get_store_list()
@@ -43,11 +44,11 @@ with st.sidebar:
     # Date range
     st.subheader("Date Range")
     if df.height > 0 and "date" in df.columns:
-        min_date = df.select(pl.col("date").min()).collect()[0, 0] if hasattr(df, 'collect') else df["date"].min()
-        max_date = df.select(pl.col("date").max()).collect()[0, 0] if hasattr(df, 'collect') else df["date"].max()
+        min_date = df["date"].min()
+        max_date = df["date"].max()
     else:
         # Fallback to transaction data if filtered df is empty
-        full_df = load_enriched_transactions()
+        full_df = load_enriched_transactions().collect()
         min_date = full_df["date"].min()
         max_date = full_df["date"].max()
     

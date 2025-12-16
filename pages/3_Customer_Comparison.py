@@ -24,7 +24,7 @@ st.markdown("### Cash vs Credit Customers: A Comprehensive Comparison")
 st.markdown("---")
 
 # Load real data using data_loader
-df = load_enriched_transactions()
+df = load_enriched_transactions().collect()
 
 # SIDEBAR FILTERS
 with st.sidebar:

@@ -22,8 +22,8 @@ COPY . .
 # Expose port for Streamlit
 EXPOSE 8080
 
-# Health check
-HEALTHCHECK CMD curl --fail http://localhost:8080/_stcore/health
+# Set environment variable for port (Cloud Run compatibility)
+ENV PORT=8080
 
-# Run Streamlit app
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0"]
+# Run Streamlit app with dynamic port support
+CMD streamlit run app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
